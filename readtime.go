@@ -27,17 +27,16 @@ func main() {
 		rt := readtime(wordsInFile(f))
 
 		if len(flag.Args()) > 1 {
-			fmt.Printf("%s\t%s\n", rt, f)
+			fmt.Printf("%3d min read\t%s\n", rt, f)
 		} else {
-			fmt.Printf("%s\n", rt)
+			fmt.Printf("%d min read\n", rt)
 		}
 	}
 }
 
-// readtime formats "N min read" string based on number of words
-func readtime(words int) string {
-	mins := words / *wpm + 1
-	return fmt.Sprintf("%3d min read", mins)
+// readtime converts number of words to estimate of read time in minutes
+func readtime(words int) int {
+	return words / *wpm + 1
 }
 
 // wordsInFile takes a filepath and returns the number of words
