@@ -10,13 +10,12 @@ import (
 
 var wpm = flag.Int("r", 200, "average reading rate in words per minute")
 
-func usage() {
-	fmt.Printf("Usage : %s [-options] [inputfiles...]\n", os.Args[0])
-	flag.PrintDefaults()
-	os.Exit(1)
-}
-
 func main() {
+	flag.Usage = func() {
+		fmt.Printf("Usage : %s [-r rate] <file ...>\n", os.Args[0])
+		flag.PrintDefaults()
+		os.Exit(1)
+	}
 	flag.Parse()
 
 	// if we had no args on command line, check to see if we can receive something
@@ -29,7 +28,7 @@ func main() {
 			fmt.Printf("%d min read\n", rt)
 			os.Exit(0)
 		} else {
-			usage()
+			flag.Usage()
 		}
 	}
 
