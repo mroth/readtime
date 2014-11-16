@@ -2,7 +2,7 @@ readtime
 ========
 
 readtime is an trivially simple command line utility to give you an estimate of
-how long it will take you to read a text-based document.
+how long it will take you to read a text-based document. :page_facing_up::eyes:
 
 Usage
 -----
@@ -30,6 +30,12 @@ reading skills on the dictionary:
 
     $ readtime -r 450 /usr/share/dict/words
     525 min read
+
+If no filenames are provided `readtime` will act like a standard Unix tool and
+attempt to process STDIN in a way that is pipeline aware.
+
+    $ lynx --dump https://www.gnu.org/gnu/manifesto.html | readtime
+    26 min read
 
 Installation
 ------------

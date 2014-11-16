@@ -19,10 +19,21 @@ func usage() {
 func main() {
 	flag.Parse()
 
+	// if we had no args on command line, check to see if we can receive something
+	// from STDIN, and process that.  If not, just display usage and exit.
 	if len(flag.Args()) < 1 {
-		usage()
+		stat, _ := os.Stdin.Stat()
+		if (stat.Mode() & os.ModeCharDevice) == 0 {
+			scanner := bufio.NewScanner(os.Stdin)
+			rt := readtime(countWords(scanner))
+			fmt.Printf("%d min read\n", rt)
+			os.Exit(0)
+		} else {
+			usage()
+		}
 	}
 
+	// normal case, process all args as filenames
 	for _, f := range flag.Args() {
 		rt := readtime(wordsInFile(f))
 
