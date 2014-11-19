@@ -41,7 +41,7 @@ Installation
 ------------
 For now this is just available as source code, and requires Go to compile.
 
-    go install github.com/mroth/readtime
+    go get github.com/mroth/readtime
 
 If there is actually demand, I will make precompiled binaries available, and
 package for homebrew, etc.
